@@ -6,8 +6,17 @@ const caminhoArquivo = process.argv;
 const link = caminhoArquivo[2];
 
 fs.readFile(link, 'utf-8', (erro,texto) => {
-    capturaPalavra(texto)
+   quebraParagrafo(texto)
+    // capturaPalavra(texto)
 });
+
+function quebraParagrafo(texto) {
+    const paragrafos = texto.toLowerCase().split('\n');
+    const contagem = paragrafos.map((paragrafos) => {
+        return capturaPalavra(paragrafos)
+    })
+    console.log(contagem)
+}
 
 
 function capturaPalavra(texto){
@@ -18,5 +27,5 @@ function capturaPalavra(texto){
         resultado[palavra] = (resultado[palavra] || 0) + 1
     });
 
-    console.log(resultado);
+    return resultado;
 }
