@@ -18,13 +18,20 @@ function quebraParagrafo(texto) {
     console.log(contagem)
 }
 
+function limpaPalavra(palavra) {
+    return palavra.replace(/[{¨!.,;:@#$%¨&*()^~=+-<>}]/g)
+}
+
 
 function capturaPalavra(texto){
     const listapalavras = texto.split(" ");
     const resultado = {};
 
     listapalavras.forEach(palavra => {
-        resultado[palavra] = (resultado[palavra] || 0) + 1
+        if(palavra.length >= 3){
+            const palavraLimpa = limpaPalavra(palavra);
+            resultado[palavraLimpa] = (resultado[palavraLimpa] || 0) + 1
+        }
     });
 
     return resultado;
