@@ -1,4 +1,9 @@
-const caminhoArquivo = process.argv;
-const link = caminhoArquivo[2]
+const { error } = require('console');
+const fs = require('fs');
 
-console.log(link)
+const caminhoArquivo = process.argv;
+const link = caminhoArquivo[2];
+
+fs.readFile(link, 'utf-8', (erro,texto) => {
+    console.log(texto);
+});
