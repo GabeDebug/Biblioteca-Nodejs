@@ -5,12 +5,16 @@ const { resourceLimits } = require('worker_threads');
 const caminhoArquivo = process.argv;
 const link = caminhoArquivo[2];
 
-fs.readFile(link, 'utf-8', (erro,texto) => {
-   quebraParagrafo(texto)
-    // capturaPalavra(texto)
+fs.readFile(link, 'utf-8', (error,texto) => {
+    if(error) {
+        console.log("Qual e o erro?", error.code)
+        return
+    }
+   contaPalavras(texto)
 });
 
-function quebraParagrafo(texto) {
+function contaPalavras(texto) {
+    const extrair = extrairParagrafo(texto);
     const paragrafos = texto.toLowerCase().split('\n');
     const contagem = paragrafos.flatMap((paragrafos) => {
         if(!paragrafos) return []
@@ -18,6 +22,10 @@ function quebraParagrafo(texto) {
 
     })
     console.log(contagem)
+};
+
+function extrairParagrafo(texto) {
+    const paragrafos = texto.toLowerCase().split('\n');
 }
 
 function limpaPalavra(palavra) {
